@@ -1,6 +1,7 @@
 
 const express = require('express');
 const cors = require('cors');
+const { socketController } = require('../sockets/controller');
 
 
 
@@ -22,8 +23,11 @@ class Server {
 
         // Rutas de mi aplicacion
         this.routes();
+
+        // Sockets
+        this.sockets();
     }
-    
+
 
         middlewares() {
             
@@ -41,6 +45,10 @@ class Server {
 
         routes() {
               
+        }
+
+        sockets(){
+            this.io.on("connection",socketController);
         }
 
         listen() {
